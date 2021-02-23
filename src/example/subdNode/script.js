@@ -44,7 +44,7 @@ async function compute() {
         'radius': radius_slider.valueAsNumber,
         'height': height_slider.valueAsNumber,
         'distance': distance_slider.valueAsNumber,
-        'explode': distance_slider.valueAsBoolean,
+        'explode': explode_checkbox.valueAsBoolean,
       }
     }
 
