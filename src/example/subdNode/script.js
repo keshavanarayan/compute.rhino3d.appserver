@@ -4,13 +4,17 @@ import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.124.0/examp
 import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js'
 
 // reference the definition
-const definitionName = 'rnd_node.gh'
+const definitionName = 'Voronoi_Table.gh'
 
 // listen for slider change events
-const count_slider = document.getElementById( 'count' )
-count_slider.addEventListener( 'mouseup', onSliderChange, false )
 const radius_slider = document.getElementById( 'radius' )
 radius_slider.addEventListener( 'mouseup', onSliderChange, false )
+const height_slider = document.getElementById( 'height' )
+height_slider.addEventListener( 'mouseup', onSliderChange, false )
+const distance_slider = document.getElementById( 'distance' )
+distance_slider.addEventListener( 'mouseup', onSliderChange, false )
+const explode_checkbox= document.getElementById( 'explode' )
+explode_checkbox.addEventListener( 'input',onclick, false )
 
 // setup dl button event
 const downloadButton = document.getElementById("downloadButton")
@@ -37,8 +41,10 @@ async function compute() {
     let data = {
       definition: definitionName,
       inputs: {
-        'count': count_slider.valueAsNumber,
-        'radius': radius_slider.valueAsNumber
+        'radius': radius_slider.valueAsNumber,
+        'height': height_slider.valueAsNumber,
+        'distance': distance_slider.valueAsNumber,
+        'explode': distance_slider.valueAsBool,
       }
     }
 

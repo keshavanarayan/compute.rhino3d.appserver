@@ -8,7 +8,7 @@
 		<style>
 			body { 
                 margin: 0;
-                font-family: sans-serif;
+                font-family: 'Courier New', Courier, monospace;
             }
 
             input { width: 80%; }
@@ -36,12 +36,20 @@
 	<body>
         <div id="loader"></div>
         <div>
-            <input type="range" id="count" name="count" min="2" max="20" value="5" step="1">
-            <label for="count">count</label>
+            <input type="range" id="radius" name="radius" min="2" max="20" value="5" step="1">
+            <label for="radius">radius</label>
         </div>
         <div>
-            <input type="range" id="radius" name="radius" min="5" max="20" value="5" step="1">
-            <label for="radius">radius</label>
+            <input type="range" id="height" name="height" min="5" max="20" value="5" step="1">
+            <label for="height">height</label>
+        </div>
+        <div>
+            <input type="range" id="distance" name="distance" min="5" max="20" value="5" step="1">
+            <label for="distance">distance</label>
+        </div>
+        <div>
+            <input type="checkbox" id="explode">
+            <label for="explode">explode</label>
         </div>
         <button id="downloadButton" disabled>Download</button>
         <script type="module" src="./script.js"></script>
