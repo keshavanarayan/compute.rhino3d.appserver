@@ -13,8 +13,8 @@ const height_slider = document.getElementById( 'height' )
 height_slider.addEventListener( 'mouseup', onSliderChange, false )
 const distance_slider = document.getElementById( 'distance' )
 distance_slider.addEventListener( 'mouseup', onSliderChange, false )
-const explode_slider= document.getElementById( 'explode' )
-explode_slider.addEventListener( 'mouseup', onSliderChange, false )
+const explode_checkbox= document.getElementById( 'explode' )
+explode_checkbox.addEventListener( 'input', onSliderChange, false )
 
 // setup dl button event
 const downloadButton = document.getElementById("downloadButton")
@@ -44,7 +44,7 @@ async function compute() {
         'radius': radius_slider.valueAsNumber,
         'height': height_slider.valueAsNumber,
         'distance': distance_slider.valueAsNumber,
-        'explode': explode_slider.valueAsBoolean,
+        'explode': explode_checkbox.valueAsBoolean,
       }
     }
 
