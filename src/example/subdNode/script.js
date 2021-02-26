@@ -4,7 +4,7 @@ import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.124.0/examp
 import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js'
 
 // reference the definition
-const definitionName = 'Voronoi_Table.gh'
+const definitionName = 'subdNode.gh'
 
 // listen for slider change events
 const radius_slider = document.getElementById( 'radius' )
