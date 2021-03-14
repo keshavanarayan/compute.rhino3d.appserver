@@ -8,11 +8,6 @@ import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm
 // set up loader for converting the results to threejs
 const loader = new Rhino3dmLoader()
 loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
-const data = {
-  definition: 'RandomContextGenerator.gh',
-  inputs: getInputs()
-}
-
 
 const definition = 'RandomContextGenerator.gh'
 
@@ -41,6 +36,51 @@ function getInputs() {
   return inputs
 }
 
+var scene, camera, renderer, controls
+
+function init() {
+
+  // Rhino models are z-up, so set this as the default
+  THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
+
+  scene = new THREE.Scene()
+  scene.background = new THREE.Color(1,1,1)
+  camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
+  camera.position.x = 1000
+  camera.position.y = 1000
+  camera.position.z = 1000
+
+  renderer = new THREE.WebGLRenderer({antialias: true})
+  renderer.setPixelRatio( window.devicePixelRatio )
+  renderer.setSize( window.innerWidth, window.innerHeight )
+  document.body.appendChild(renderer.domElement)
+
+  controls = new OrbitControls( camera, renderer.domElement  )
+
+  window.addEventListener( 'resize', onWindowResize, false )
+
+  animate()
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize( window.innerWidth, window.innerHeight )
+  animate()
+}
+
+/**
+ * Helper function that behaves like rhino's "zoom to selection", but for three.js!
+ */
+ function zoomCameraToSelection( camera, controls, selection, fitOffset = 1.2 )
+  {
+    const box = new THREE.Box3();
+  
+  for( const object of selection ) {
+    if (object.isLight) continue
+    box.expandByObject( object );
+  }
+  
 
 let points = []
 
@@ -51,16 +91,17 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
-  SitePts()
+  rndPts()
+  getInputs()
+  zoomCameraToSelection()
   compute()
 })
 
-function SitePts() {
+function rndPts() {
   // generate random points
 
   const cntPts = 5
-
-
+ 
   for (let i = 0; i < cntPts; i++) {
     const x = Math.random() * 1000
     const y = Math.random() * 500
@@ -113,6 +154,7 @@ function onChange() {
 
   controls.enabled = false
 
+}
 
 /**
  * Call appserver
@@ -122,15 +164,9 @@ async function compute () {
   showSpinner(true)
 
   // initialise 'data' object that will be used by compute()
-  const data = {
-    definition: definition,
-    inputs: {
-      'Road Width': roadwidth_slider.valueAsNumber,
-      'Site Radius': siteradius_slider.valueAsNumber,
-      'Site Radius': minfloorheight_slider.valueAsNumber,
-      'points': points
-    }
-  }
+  const url = new URL('/solve/' + data.definition, window.location.origin)
+  Object.keys(data.inputs).forEach(key => url.searchParams.append(key, data.inputs[key]))
+  console.log(url.toString())
 
   console.log(data.inputs)
 
@@ -253,11 +289,23 @@ return null
  * Called when a slider value changes in the UI. Collect all of the
  * slider values and call compute to solve for a new scene
  */
-function onSliderChange () {
-  // show spinner
+ function onSliderChange () {
   showSpinner(true)
-  compute()
-}
+  // get slider values
+  let inputs = {}
+  for (const input of document.getElementsByTagName('input')) {
+    switch (input.type) {
+    case 'number':
+      inputs[input.id] = input.valueAsNumber
+      break
+    case 'range':
+      inputs[input.id] = input.valueAsNumber
+      break
+    case 'checkbox':
+      inputs[input.id] = input.checked
+      break
+    }
+  }
 
 /**
  * Shows or hides the loading spinner
@@ -271,55 +319,12 @@ function onSliderChange () {
 
 // BOILERPLATE //
 
-var scene, camera, renderer, controls
 
-function init () {
-
-  // Rhino models are z-up, so set this as the default
-  THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
-
-  scene = new THREE.Scene()
-  scene.background = new THREE.Color(1,1,1)
-  camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
-  camera.position.x = 1000
-  camera.position.y = 1000
-  camera.position.z = 1000
-
-  renderer = new THREE.WebGLRenderer({antialias: true})
-  renderer.setPixelRatio( window.devicePixelRatio )
-  renderer.setSize( window.innerWidth, window.innerHeight )
-  document.body.appendChild(renderer.domElement)
-
-  controls = new OrbitControls( camera, renderer.domElement  )
-
-  window.addEventListener( 'resize', onWindowResize, false )
-
-  animate()
-}
 
 var animate = function () {
   requestAnimationFrame( animate )
   renderer.render( scene, camera )
 }
-  
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize( window.innerWidth, window.innerHeight )
-  animate()
-}
-
-/**
- * Helper function that behaves like rhino's "zoom to selection", but for three.js!
- */
- function zoomCameraToSelection( camera, controls, selection, fitOffset = 1.2 ) {
-  
-  const box = new THREE.Box3();
-  
-  for( const object of selection ) {
-    if (object.isLight) continue
-    box.expandByObject( object );
-  }
   
   const size = box.getSize( new THREE.Vector3() );
   const center = box.getCenter( new THREE.Vector3() );
@@ -342,7 +347,7 @@ function onWindowResize() {
   camera.position.copy( controls.target ).sub(direction);
   
   controls.update();
-
+  
 }
 
 }
