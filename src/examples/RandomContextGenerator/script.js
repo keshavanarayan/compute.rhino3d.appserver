@@ -161,6 +161,21 @@ function onChange() {
  */
 async function compute () {
 
+  const data = {
+    definition: definition,
+    inputs: {
+      'Road Width': roadwidth_slider.valueAsNumber,
+      'Site Radius': siteradius_slider.valueAsNumber,
+      'Min Floor Height': minfloorheight_slider.valueAsNumber,
+      'Max Floor Height': maxfloorheight_slider.valueAsNumber,
+      '3d': d_checkbox,
+      'Road Polyline': roadpolyline_checkbox,
+      'Display Trees': displaytrees_checkbox,
+      'Carve Out Site': carveoutsite_checkbox,
+      'points': points
+    }
+  }
+
   showSpinner(true)
 
   // initialise 'data' object that will be used by compute()
