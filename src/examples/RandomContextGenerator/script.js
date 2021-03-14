@@ -8,16 +8,39 @@ import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm
 // set up loader for converting the results to threejs
 const loader = new Rhino3dmLoader()
 loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
+const data = {
+  definition: 'RandomContextGenerator.gh',
+  inputs: getInputs()
+}
 
-const definition = 'metaballTable.gh'
+
+const definition = 'RandomContextGenerator.gh'
 
 // setup input change events
-const dimension_slider = document.getElementById( 'dimension' )
-dimension_slider.addEventListener( 'mouseup', onSliderChange, false )
-dimension_slider.addEventListener( 'touchend', onSliderChange, false )
-const height_slider = document.getElementById( 'height' )
-height_slider.addEventListener( 'mouseup', onSliderChange, false )
-height_slider.addEventListener( 'touchend', onSliderChange, false )
+function getInputs() {
+  const inputs = {}
+  for (const input of document.getElementsByTagName('input')) {
+    switch (input.type) {
+      case 'number':
+        inputs[input.id] = input.valueAsNumber
+        input.onchange = onSliderChange
+        break
+      case 'range':
+        inputs[input.id] = input.valueAsNumber
+        input.onmouseup = onSliderChange
+        input.ontouchend = onSliderChange
+        break
+      case 'checkbox':
+        inputs[input.id] = input.checked
+        input.onclick = onSliderChange
+        break
+      default:
+        break
+    }
+  }
+  return inputs
+}
+
 
 let points = []
 
@@ -28,20 +51,19 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
-  rndPts()
+  SitePts()
   compute()
 })
 
-function rndPts() {
+function SitePts() {
   // generate random points
 
-  const cntPts = 3
-  const bndX = dimension_slider.valueAsNumber / 2
-  const bndY = dimension_slider.valueAsNumber / 2
+  const cntPts = 5
+
 
   for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * (bndX - -bndX) + -bndX
-    const y = Math.random() * (bndY - -bndY) + -bndY
+    const x = Math.random() * 1000
+    const y = Math.random() * 500
     const z = 0
 
     const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
@@ -91,7 +113,6 @@ function onChange() {
 
   controls.enabled = false
 
-}
 
 /**
  * Call appserver
@@ -104,8 +125,9 @@ async function compute () {
   const data = {
     definition: definition,
     inputs: {
-      'dimension': dimension_slider.valueAsNumber,
-      'height': height_slider.valueAsNumber,
+      'Road Width': roadwidth_slider.valueAsNumber,
+      'Site Radius': siteradius_slider.valueAsNumber,
+      'Site Radius': minfloorheight_slider.valueAsNumber,
       'points': points
     }
   }
