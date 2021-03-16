@@ -247,14 +247,13 @@ function onChange() {
     compute()
     controls.enabled = true
     return 
-            }
-          }
-        }
+     }
+     }
+     }
 
 }
 
   controls.enabled = false
-
 
 
 /**
@@ -354,6 +353,7 @@ async function compute () {
   loader.parse( buffer, function ( object ) 
   {
 
+  
       // clear objects from scene
       scene.traverse(child => {
         if ( child.userData.hasOwnProperty( 'objectType' ) && child.userData.objectType === 'File3dm') {
