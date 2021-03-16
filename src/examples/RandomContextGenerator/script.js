@@ -66,7 +66,7 @@ function sitePoint() {
   const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
   console.log( `x ${xf} y ${yf}` )
   points.push(ptf)
-  const icoGeo = new THREE.IcosahedronGeometry(25)
+  const icoGeo = new THREE.IcosahedronGeometry(1)
   const icoMat = new THREE.MeshNormalMaterial()
   const ico = new THREE.Mesh( icoGeo, icoMat )
   ico.name = 'icof'
@@ -89,7 +89,7 @@ function rndPts() {
   const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
   console.log( `x ${x} y ${y}` )
   points.push(pt)
-  const icoGeo = new THREE.IcosahedronGeometry(25)
+  const icoGeo = new THREE.IcosahedronGeometry(1)
   const icoMat = new THREE.MeshNormalMaterial()
   const ico = new THREE.Mesh( icoGeo, icoMat )
   ico.name = 'ico'
@@ -174,88 +174,48 @@ function rndPts() {
 let dragging = false
 function onChange() {
   dragging = ! dragging
-  if ( !dragging ) {
+  if (!dragging) {
     // update points position
     points = []
+    sitepoint = []
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
         points.push( pt )
-        console.log(pt)
+        console.log('ico - ' + pt)
+      }
+      if (child.name === 'icoa') {
+        const pta = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        points.push(pta)
+        console.log('icoa - ' + pta)
+      }
+      if (child.name === 'icob') {
+        const ptb = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        points.push(ptb)
+        console.log('icob - ' + ptb)
+      }
+      if (child.name === 'icoc') {
+        const ptc = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        points.push(ptc)
+        console.log('icoc - ' + ptc)
+      }
+      if (child.name === 'icod') {
+        const ptd = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        points.push(ptd)
+        console.log('icod - ' + ptd)
+      }
+      if (child.name === 'icof') {
+        const ptf = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        sitepoint.push(ptf)
+        console.log('site - ' + ptf)
       }
     }, false)
-  }
-}
-
-    if ( !dragging ) {
-      // update points position
-      points = []
-      scene.traverse(child => {
-        if ( child.name === 'icoa' ) {
-          const pt = "{\"X\":" + child.position.xa + ",\"Y\":" + child.position.ya + ",\"Z\":" + child.position.za + "}"
-          points.push( pta )
-          console.log(pta)
-        }
-      }, false)
-    }
-
-    if ( !dragging ) {
-        // update points position
-        points = []
-        scene.traverse(child => {
-          if ( child.name === 'icob' ) {
-            const pt = "{\"X\":" + child.position.xb + ",\"Y\":" + child.position.yb + ",\"Z\":" + child.position.zb + "}"
-            points.push( ptb )
-            console.log(ptb)
-          }
-        }, false)
-    
-    if ( !dragging ) {
-          // update points position
-          points = []
-          scene.traverse(child => {
-            if ( child.name === 'icoc' ) {
-              const pt = "{\"X\":" + child.position.xc + ",\"Y\":" + child.position.yc + ",\"Z\":" + child.position.zc + "}"
-              points.push( ptc )
-              console.log(ptc)
-            }
-          }, false)
-
-    if ( !dragging ) {
-            // update points position
-            points = []
-            scene.traverse(child => {
-              if ( child.name === 'icod' ) {
-                const pt = "{\"X\":" + child.position.xd + ",\"Y\":" + child.position.yd + ",\"Z\":" + child.position.zd + "}"
-                points.push( ptd )
-                console.log(ptd)
-              }
-            }, false)
-
-    if ( !dragging ) {
-              // update points position
-              points = []
-              scene.traverse(child => {
-                if ( child.name === 'icof' ) {
-                  const pt = "{\"X\":" + child.position.xf + ",\"Y\":" + child.position.yf + ",\"Z\":" + child.position.zf + "}"
-                  points.push( ptf )
-                  console.log(ptf)
-                }
-              }, false)
-  
-
     compute()
     controls.enabled = true
-    return 
-     }
-     }
-     }
-
-}
-
+    return
+  }
   controls.enabled = false
-
-
+}
 /**
  * Call appserver
  */
@@ -267,21 +227,21 @@ async function compute () {
   const data = {
     definition: definition,
     inputs: {
-      'Road Width': roadwidth_slider.valueAsNumber,
-      'Site Radius': siteradius_slider.valueAsNumber,
-      'Min Floor Height': minfloorheight_slider.valueAsNumber,
-      'Max Floor Height': maxfloorheight_slider.valueAsNumber,
-      'Area of Block': areaofblock_slider.valueAsNumber,
-      'Area of Plot': areaofblock_slider.valueAsNumber,
+      'RH_IN:RoadWidth': roadwidth_slider.valueAsNumber,
+      'RH_IN:SiteRadius': siteradius_slider.valueAsNumber,
+      'RH_IN:MinFloorHeight': minfloorheight_slider.valueAsNumber,
+      'RH_IN:MaxFloorHeight': maxfloorheight_slider.valueAsNumber,
+      'RH_IN:AreaofBlock': areaofblock_slider.valueAsNumber,
+      'RH_IN:Area of Plot': areaofblock_slider.valueAsNumber,
 
-      '3d': d_checkbox.checked,
-      'Road Polyline': roadpolyline_checkbox.checked,
-      'Display Trees': displaytrees_checkbox.checked,
-      'Carve Out Site': carveoutsite_checkbox.checked,
-      'Display Design': displaydesign_checkbox.checked,
+      'RH_IN:3d': d_checkbox.checked,
+      'RH_IN:DisplayRoadPolyline': roadpolyline_checkbox.checked,
+      'RH_IN:DisplayTrees': displaytrees_checkbox.checked,
+      'RH_IN:CarveOutSite': carveoutsite_checkbox.checked,
+      'RH_IN:DisplayYourDesign': displaydesign_checkbox.checked,
 
-      'points': points,
-      'sitepoint': sitepoint
+      'RH_IN:points': points,
+      'RH_IN:SitePoint': sitepoint
     }
   }
 
@@ -445,6 +405,14 @@ function init()
   document.body.appendChild(renderer.domElement)
 
   controls = new OrbitControls( camera, renderer.domElement  )
+
+  // add a directional light
+  const directionalLight = new THREE.DirectionalLight( 0xffffff )
+  directionalLight.intensity = 2
+  scene.add( directionalLight )
+ 
+  const ambientLight = new THREE.AmbientLight()
+  scene.add( ambientLight )
 
   window.addEventListener( 'resize', onWindowResize, false )
 
