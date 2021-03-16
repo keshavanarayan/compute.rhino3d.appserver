@@ -286,17 +286,15 @@ function onSliderChange () {
 
 var scene, camera, renderer, controls
 
+var scene, camera, renderer, controls
+
 function init () {
 
   // Rhino models are z-up, so set this as the default
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
   scene = new THREE.Scene()
-    scene.background = new THREE.Color(1, 1, 1)
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
-    camera.position.set(1, -1, 1) // like perspective view
-
-
+  scene.background = new THREE.Color(1,1,1)
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
   camera.position.y = 1000
