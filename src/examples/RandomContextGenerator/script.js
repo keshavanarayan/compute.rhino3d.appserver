@@ -52,7 +52,7 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
-  zoomCameraToSelection()
+  readSingleFile()
   rndPts()
   compute()
 })
@@ -64,8 +64,8 @@ function rndPts() {
   const cntPts = 5
 
   for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * 1000
-    const y = Math.random() * 500
+    const x = Math.random() * 100
+    const y = Math.random() * 50
     const z = 0
 
     const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
@@ -75,7 +75,7 @@ function rndPts() {
     points.push(pt)
 
     //viz in three
-    const icoGeo = new THREE.IcosahedronGeometry(1)
+    const icoGeo = new THREE.IcosahedronGeometry(10)
     const icoMat = new THREE.MeshNormalMaterial()
     const ico = new THREE.Mesh( icoGeo, icoMat )
     ico.name = 'ico'
@@ -295,6 +295,7 @@ function init () {
     scene.background = new THREE.Color(1, 1, 1)
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
     camera.position.set(1, -1, 1) // like perspective view
+
 
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
