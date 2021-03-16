@@ -52,6 +52,7 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
+  zoomCameraToSelection()
   rndPts()
   compute()
 })
@@ -60,120 +61,35 @@ rhino3dm().then(async m => {
 function rndPts() {
   // generate random points
 
-  const x = 53
-  const y = 22
-  const z = 0
-  const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+  const cntPts = 5
 
-  console.log( `x ${x} y ${y}` )
+  for (let i = 0; i < cntPts; i++) {
+    const x = Math.random() * 1000
+    const y = Math.random() * 500
+    const z = 0
 
-  points.push(pt)
+    const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
 
-  const icoGeo = new THREE.IcosahedronGeometry(25)
-  const icoMat = new THREE.MeshNormalMaterial()
-  const ico = new THREE.Mesh( icoGeo, icoMat )
-  ico.name = 'ico'
-  ico.position.set( x, y, z)
-  scene.add( ico )
+    console.log( `x ${x} y ${y}` )
+
+    points.push(pt)
+
+    //viz in three
+    const icoGeo = new THREE.IcosahedronGeometry(1)
+    const icoMat = new THREE.MeshNormalMaterial()
+    const ico = new THREE.Mesh( icoGeo, icoMat )
+    ico.name = 'ico'
+    ico.position.set( x, y, z)
+    scene.add( ico )
     
-  let tcontrols = new TransformControls( camera, renderer.domElement )
-  tcontrols.enabled = true
-  tcontrols.attach( ico )
-  tcontrols.showZ = false
-  tcontrols.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrols)
-
-  //--------------------
-  const xa = 49
-  const ya = 5
-  const za = 0
-  const pta = "{\"X\":" + xa + ",\"Y\":" + ya + ",\"Z\":" + za + "}"
-
-  console.log( `x ${xa} y ${ya}` )
-
-  points.push(pta)
-
-  const icoa = new THREE.Mesh( icoGeo, icoMat )
-  icoa.name = 'icoa'
-  icoa.position.set( xa, ya, za)
-  scene.add( icoa )
+    let tcontrols = new TransformControls( camera, renderer.domElement )
+    tcontrols.enabled = true
+    tcontrols.attach( ico )
+    tcontrols.showZ = false
+    tcontrols.addEventListener( 'dragging-changed', onChange )
+    scene.add(tcontrols)
     
-  let tcontrolsa = new TransformControls( camera, renderer.domElement )
-  tcontrolsa.enabled = true
-  tcontrolsa.attach( icoa )
-  tcontrolsa.showZ = false
-  tcontrolsa.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsa)
-
-  //--------------
-
-  const xb = 19
-  const yb = 3
-  const zb = 0
-  const ptb = "{\"X\":" + xb + ",\"Y\":" + yb + ",\"Z\":" + zb + "}"
-
-  console.log( `x ${xb} y ${yb}` )
-
-  points.push(ptb)
-
-  const icob = new THREE.Mesh( icoGeo, icoMat )
-  icob.name = 'icob'
-  icob.position.set( xb, yb, zb)
-  scene.add( icob )
-    
-  let tcontrolsb = new TransformControls( camera, renderer.domElement )
-  tcontrolsb.enabled = true
-  tcontrolsb.attach( icoa )
-  tcontrolsb.showZ = false
-  tcontrolsb.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsb)
-  
-  //--------------
-
-  const xc = 20
-  const yc = 27
-  const zc = 0
-  const ptc = "{\"X\":" + xc + ",\"Y\":" + yc + ",\"Z\":" + zc + "}"
-
-  console.log( `x ${xc} y ${yc}` )
-
-  points.push(ptc)
-
-  const icoc = new THREE.Mesh( icoGeo, icoMat )
-  icoc.name = 'icoc'
-  icob.position.set( xc, yc, zc)
-  scene.add( icoc )
-    
-  let tcontrolsc = new TransformControls( camera, renderer.domElement )
-  tcontrolsc.enabled = true
-  tcontrolsc.attach( icoa )
-  tcontrolsc.showZ = false
-  tcontrolsc.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsc)
-
-  //--------------
-
-  const xd = 41
-  const yd = 32
-  const zd = 0
-  const ptd = "{\"X\":" + xd + ",\"Y\":" + yd + ",\"Z\":" + zd + "}"
-
-  console.log( `x ${xd} y ${yd}` )
-
-  points.push(ptd)
-
-  const icod = new THREE.Mesh( icoGeo, icoMat )
-  icod.name = 'icoc'
-  icod.position.set( xd, yd, zd)
-  scene.add( icod )
-    
-  let tcontrolsd = new TransformControls( camera, renderer.domElement )
-  tcontrolsd.enabled = true
-  tcontrolsd.attach( icoa )
-  tcontrolsd.showZ = false
-  tcontrolsd.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsd)
-    
+  }
 
 }
 
@@ -189,7 +105,6 @@ function onChange() {
         points.push( pt )
         console.log(pt)
       }
-
     }, false)
 
     compute()
@@ -377,8 +292,9 @@ function init () {
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
   scene = new THREE.Scene()
-  scene.background = new THREE.Color( 0xcce0ff );
-  scene.fog = new THREE.Fog( 0xcce0ff, 500, 10000 );
+    scene.background = new THREE.Color(1, 1, 1)
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
+    camera.position.set(1, -1, 1) // like perspective view
 
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
