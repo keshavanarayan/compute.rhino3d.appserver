@@ -24,6 +24,14 @@ minfloorheight_slider.addEventListener( 'touchend', onSliderChange, false )
 const maxfloorheight_slider = document.getElementById( 'Site Radius' )
 maxfloorheight_slider.addEventListener( 'mouseup', onSliderChange, false )
 maxfloorheight_slider.addEventListener( 'touchend', onSliderChange, false )
+const areaofplot_slider = document.getElementById( 'Area of Plot' )
+areaofplot_slider.addEventListener( 'mouseup', onSliderChange, false )
+areaofplot_slider.addEventListener( 'touchend', onSliderChange, false )
+const areaofblock_slider = document.getElementById( 'Area of Block' )
+areaofblock_slider.addEventListener( 'mouseup', onSliderChange, false )
+areaofblock_slider.addEventListener( 'touchend', onSliderChange, false )
+
+
 const d_checkbox = document.querySelector('input[id="3d"]');
 d_checkbox.addEventListener( 'change', onSliderChange, false )
 const roadpolyline_checkbox = document.querySelector('input[id="Road Polyline"]');
@@ -32,6 +40,8 @@ const displaytrees_checkbox = document.querySelector('input[id="Display Trees"]'
 displaytrees_checkbox.addEventListener( 'change', onSliderChange, false )
 const carveoutsite_checkbox = document.querySelector('input[id="Carve Out Site"]');
 carveoutsite_checkbox.addEventListener( 'change', onSliderChange, false )
+const displaydesign_checkbox = document.querySelector('input[id="Display Design"]');
+displaydesign_checkbox.addEventListener( 'change', onSliderChange, false )
 
 let points = []
 
@@ -179,6 +189,31 @@ function onChange() {
         points.push( pt )
         console.log(pt)
       }
+    scene.traverse(child => {
+        if ( child.name === 'icoa' ) {
+          const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+          points.push( pta )
+          console.log(pta)
+        }
+    scene.traverse(child => {
+          if ( child.name === 'icob' ) {
+            const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+            points.push( ptb )
+            console.log(ptb)
+          }
+    scene.traverse(child => {
+            if ( child.name === 'icoc' ) {
+              const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+              points.push( ptc )
+              console.log(ptc)
+            }
+    scene.traverse(child => {
+              if ( child.name === 'icod' ) {
+                const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+                points.push( ptd )
+                console.log(ptd)
+              }
+
     }, false)
 
     compute()
@@ -206,10 +241,15 @@ async function compute () {
       'Site Radius': siteradius_slider.valueAsNumber,
       'Min Floor Height': minfloorheight_slider.valueAsNumber,
       'Max Floor Height': maxfloorheight_slider.valueAsNumber,
+      'Area of Block': areaofblock_slider.valueAsNumber,
+      'Area of Plot': areaofblock_slider.valueAsNumber,
+
       '3d': d_checkbox.checked,
       'Road Polyline': roadpolyline_checkbox.checked,
       'Display Trees': displaytrees_checkbox.checked,
       'Carve Out Site': carveoutsite_checkbox.checked,
+      'Display Design': displaydesign_checkbox.checked,
+
       'points': points
     }
   }
@@ -361,7 +401,9 @@ function init () {
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
   scene = new THREE.Scene()
-  scene.background = new THREE.Color(1,1,1)
+  scene.background = new THREE.Color( 0xcce0ff );
+  scene.fog = new THREE.Fog( 0xcce0ff, 500, 10000 );
+
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
   camera.position.y = 1000
