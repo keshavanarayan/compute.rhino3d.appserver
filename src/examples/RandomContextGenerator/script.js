@@ -189,30 +189,6 @@ function onChange() {
         points.push( pt )
         console.log(pt)
       }
-    scene.traverse(child => {
-        if ( child.name === 'icoa' ) {
-          const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-          points.push( pta )
-          console.log(pta)
-        }
-    scene.traverse(child => {
-          if ( child.name === 'icob' ) {
-            const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-            points.push( ptb )
-            console.log(ptb)
-          }
-    scene.traverse(child => {
-            if ( child.name === 'icoc' ) {
-              const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-              points.push( ptc )
-              console.log(ptc)
-            }
-    scene.traverse(child => {
-              if ( child.name === 'icod' ) {
-                const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-                points.push( ptd )
-                console.log(ptd)
-              }
 
     }, false)
 
