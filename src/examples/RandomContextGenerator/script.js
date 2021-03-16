@@ -54,44 +54,121 @@ rhino3dm().then(async m => {
 
   init()
   rndPts()
+  sitePoint()
   compute()
 })
 
+function sitePoint() {
+  // generate random points
+  const xf = 4
+  const yf = -12
+  const zf = 0
+  const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
+  console.log( `x ${xf} y ${yf}` )
+  points.push(ptf)
+  const icoGeo = new THREE.IcosahedronGeometry(25)
+  const icoMat = new THREE.MeshNormalMaterial()
+  const ico = new THREE.Mesh( icoGeo, icoMat )
+  ico.name = 'icof'
+  ico.position.set( xf, yf, zf)
+  scene.add( icof )
+  let tcontrolsf = new TransformControls( camera, renderer.domElement )
+  tcontrolsf.enabled = true
+  tcontrolsf.attach( icof )
+  tcontrolsf.showZ = false
+  tcontrolsf.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsf)
+}
+
+
 function rndPts() {
   // generate random points
-
-  const cntPts = 5
-  const bndX = areaofplot_slider.valueAsNumber*2
-  const bndY = areaofplot_slider.valueAsNumber*2
-
-  for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * (bndX - -bndX) + -bndX
-    const y = Math.random() * (bndY - -bndY) + -bndY
-    const z = 0
-
-    const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
-
-    console.log( `x ${x} y ${y}` )
-
-    points.push(pt)
-
-    //viz in three
-    const icoGeo = new THREE.IcosahedronGeometry(25)
-    const icoMat = new THREE.MeshNormalMaterial()
-    const ico = new THREE.Mesh( icoGeo, icoMat )
-    ico.name = 'ico'
-    ico.position.set( x, y, z)
-    scene.add( ico )
-    
-    let tcontrols = new TransformControls( camera, renderer.domElement )
-    tcontrols.enabled = true
-    tcontrols.attach( ico )
-    tcontrols.showZ = false
-    tcontrols.addEventListener( 'dragging-changed', onChange )
-    scene.add(tcontrols)
-    
-  }
-
+  const x = 18
+  const y = 0
+  const z = 0
+  const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+  console.log( `x ${x} y ${y}` )
+  points.push(pt)
+  const icoGeo = new THREE.IcosahedronGeometry(25)
+  const icoMat = new THREE.MeshNormalMaterial()
+  const ico = new THREE.Mesh( icoGeo, icoMat )
+  ico.name = 'ico'
+  ico.position.set( x, y, z)
+  scene.add( ico )
+  let tcontrols = new TransformControls( camera, renderer.domElement )
+  tcontrols.enabled = true
+  tcontrols.attach( ico )
+  tcontrols.showZ = false
+  tcontrols.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrols)
+  //--------------------
+  const xa = 18
+  const ya = -18
+  const za = 0
+  const pta = "{\"X\":" + xa + ",\"Y\":" + ya + ",\"Z\":" + za + "}"
+  console.log( `x ${xa} y ${ya}` )
+  points.push(pta)
+  const icoa = new THREE.Mesh( icoGeo, icoMat )
+  icoa.name = 'icoa'
+  icoa.position.set( xa, ya, za)
+  scene.add( icoa )
+  let tcontrolsa = new TransformControls( camera, renderer.domElement )
+  tcontrolsa.enabled = true
+  tcontrolsa.attach( icoa )
+  tcontrolsa.showZ = false
+  tcontrolsa.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsa)
+  //--------------
+  const xb = -12
+  const yb = -14
+  const zb = 0
+  const ptb = "{\"X\":" + xb + ",\"Y\":" + yb + ",\"Z\":" + zb + "}"
+  console.log( `x ${xb} y ${yb}` )
+  points.push(ptb)
+  const icob = new THREE.Mesh( icoGeo, icoMat )
+  icob.name = 'icob'
+  icob.position.set( xb, yb, zb)
+  scene.add( icob )
+  let tcontrolsb = new TransformControls( camera, renderer.domElement )
+  tcontrolsb.enabled = true
+  tcontrolsb.attach( icob )
+  tcontrolsb.showZ = false
+  tcontrolsb.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsb)
+  //--------------
+  const xc = -11
+  const yc = 4
+  const zc = 0
+  const ptc = "{\"X\":" + xc + ",\"Y\":" + yc + ",\"Z\":" + zc + "}"
+  console.log( `x ${xc} y ${yc}` )
+  points.push(ptc)
+  const icoc = new THREE.Mesh( icoGeo, icoMat )
+  icoc.name = 'icoc'
+  icob.position.set( xc, yc, zc)
+  scene.add( icoc )
+  let tcontrolsc = new TransformControls( camera, renderer.domElement )
+  tcontrolsc.enabled = true
+  tcontrolsc.attach( icoc )
+  tcontrolsc.showZ = false
+  tcontrolsc.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsc)
+  //--------------
+  const xd = -4
+  const yd = 8
+  const zd = 0
+  const ptd = "{\"X\":" + xd + ",\"Y\":" + yd + ",\"Z\":" + zd + "}"
+  console.log( `x ${xd} y ${yd}` )
+  points.push(ptd)
+  const icod = new THREE.Mesh( icoGeo, icoMat )
+  icod.name = 'icod'
+  icod.position.set( xd, yd, zd)
+  scene.add( icod )
+  let tcontrolsd = new TransformControls( camera, renderer.domElement )
+  tcontrolsd.enabled = true
+  tcontrolsd.attach( icod )
+  tcontrolsd.showZ = false
+  tcontrolsd.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsd)
 }
 
 let dragging = false
@@ -107,6 +184,65 @@ function onChange() {
         console.log(pt)
       }
     }, false)
+  }
+}
+
+    if ( !dragging ) {
+      // update points position
+      points = []
+      scene.traverse(child => {
+        if ( child.name === 'icoa' ) {
+          const pt = "{\"X\":" + child.position.xa + ",\"Y\":" + child.position.ya + ",\"Z\":" + child.position.za + "}"
+          points.push( pta )
+          console.log(pta)
+        }
+      }, false)
+    }
+
+    if ( !dragging ) {
+        // update points position
+        points = []
+        scene.traverse(child => {
+          if ( child.name === 'icob' ) {
+            const pt = "{\"X\":" + child.position.xb + ",\"Y\":" + child.position.yb + ",\"Z\":" + child.position.zb + "}"
+            points.push( ptb )
+            console.log(ptb)
+          }
+        }, false)
+    
+    if ( !dragging ) {
+          // update points position
+          points = []
+          scene.traverse(child => {
+            if ( child.name === 'icoc' ) {
+              const pt = "{\"X\":" + child.position.xc + ",\"Y\":" + child.position.yc + ",\"Z\":" + child.position.zc + "}"
+              points.push( ptc )
+              console.log(ptc)
+            }
+          }, false)
+
+    if ( !dragging ) {
+            // update points position
+            points = []
+            scene.traverse(child => {
+              if ( child.name === 'icod' ) {
+                const pt = "{\"X\":" + child.position.xd + ",\"Y\":" + child.position.yd + ",\"Z\":" + child.position.zd + "}"
+                points.push( ptd )
+                console.log(ptd)
+              }
+            }, false)
+
+    if ( !dragging ) {
+              // update points position
+              points = []
+              scene.traverse(child => {
+                if ( child.name === 'icof' ) {
+                  const pt = "{\"X\":" + child.position.xf + ",\"Y\":" + child.position.yf + ",\"Z\":" + child.position.zf + "}"
+                  points.push( ptf )
+                  console.log(ptf)
+                }
+              }, false)
+  
 
     compute()
 
@@ -142,7 +278,8 @@ async function compute () {
       'Carve Out Site': carveoutsite_checkbox.checked,
       'Display Design': displaydesign_checkbox.checked,
 
-      'points': points
+      'points': points,
+      'sitepoint': sitepoint
     }
   }
 
@@ -287,8 +424,8 @@ function onSliderChange () {
 
 var scene, camera, renderer, controls
 
-function init () {
-
+function init() 
+{
   // Rhino models are z-up, so set this as the default
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
@@ -356,5 +493,6 @@ function onWindowResize() {
   camera.position.copy( controls.target ).sub(direction);
   
   controls.update();
-  
+}
+}
 }
