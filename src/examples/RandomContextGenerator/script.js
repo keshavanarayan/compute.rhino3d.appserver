@@ -44,6 +44,7 @@ const displaydesign_checkbox = document.querySelector('input[id="Display Design"
 displaydesign_checkbox.addEventListener( 'change', onSliderChange, false )
 
 let points = []
+let sitepoint = []
 
 let rhino, doc
 
@@ -52,20 +53,20 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
-  readSingleFile()
   rndPts()
   compute()
 })
-
 
 function rndPts() {
   // generate random points
 
   const cntPts = 5
+  const bndX = areaofplot_slider.valueAsNumber*2
+  const bndY = areaofplot_slider.valueAsNumber*2
 
   for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * 100
-    const y = Math.random() * 50
+    const x = Math.random() * (bndX - -bndX) + -bndX
+    const y = Math.random() * (bndY - -bndY) + -bndY
     const z = 0
 
     const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
@@ -75,7 +76,7 @@ function rndPts() {
     points.push(pt)
 
     //viz in three
-    const icoGeo = new THREE.IcosahedronGeometry(10)
+    const icoGeo = new THREE.IcosahedronGeometry(25)
     const icoMat = new THREE.MeshNormalMaterial()
     const ico = new THREE.Mesh( icoGeo, icoMat )
     ico.name = 'ico'
@@ -283,8 +284,6 @@ function onSliderChange () {
 }
 
 // BOILERPLATE //
-
-var scene, camera, renderer, controls
 
 var scene, camera, renderer, controls
 
