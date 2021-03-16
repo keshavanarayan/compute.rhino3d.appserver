@@ -245,14 +245,17 @@ function onChange() {
   
 
     compute()
-
     controls.enabled = true
     return 
+            }
+          }
+        }
+
 }
 
   controls.enabled = false
 
-}
+
 
 /**
  * Call appserver
@@ -493,6 +496,4 @@ function onWindowResize() {
   camera.position.copy( controls.target ).sub(direction);
   
   controls.update();
-}
-}
 }
