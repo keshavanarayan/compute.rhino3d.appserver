@@ -63,33 +63,33 @@ function sitePoint() {
   const startSitePt = [
     { x: 30, y: 22, z: 0 },
 ]
-const cntSPts = startSitePt.length
+const cntPts = startPt.length
 
   for (let i = 0; i < cntSPts; i++) {
-    const x = startSitePt[i].x
-    const y = startSitePt[i].y
-    const z = startSitePt[i].z
+    const x = startPt[i].x
+    const y = startPt[i].y
+    const z = startPt[i].z
 
-    const Spt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+    const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
 
     console.log( `x ${x} y ${y}` )
 
-    sitepoint.push(Spt)
+    sitepoint.push(pt)
 
 //viz in three
-const icoGeoa = new THREE.IcosahedronGeometry(0.5)
-const icoMata = new THREE.MeshNormalMaterial()
-const icoa = new THREE.Mesh( icoGeoa, icoMata )
-ico.name = 'icoa'
+const icoGeo = new THREE.IcosahedronGeometry(0.5)
+const icoMat = new THREE.MeshNormalMaterial()
+const ico = new THREE.Mesh( icoGeo, icoMat )
+ico.name = 'ico'
 ico.position.set( x, y, z)
-scene.add( icoa )
+scene.add( ico )
 
 let tcontrolsa = new TransformControls( camera, renderer.domElement )
-tcontrolsa.enabled = true
-tcontrolsa.attach( icoa )
-tcontrolsa.showZ = false
-tcontrolsa.addEventListener( 'dragging-changed', onChangea )
-scene.add(tcontrolsa)
+tcontrols.enabled = true
+tcontrols.attach( ico )
+tcontrols.showZ = false
+tcontrols.addEventListener( 'dragging-changed', onChangea )
+scene.add(tcontrols)
 
 }
 
@@ -165,12 +165,12 @@ function onChangea() {
   dragging = ! dragging
   if ( !dragging ) {
     // update points position
-    points = []
+    sitepoint = []
     scene.traverse(child => {
-      if ( child.name === 'icoa' ) {
+      if ( child.name === 'ico' ) {
         const pta = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push( pta )
-        console.log(pta)
+        points.push( pt )
+        console.log(pt)
       }
     }, false)
 
