@@ -55,6 +55,7 @@ rhino3dm().then(async m => {
   init()
   rndPts()
   sitePoint()
+  zoomCameraToSelection()
   compute()
 })
 
@@ -373,6 +374,7 @@ function init()
   document.body.appendChild(renderer.domElement)
 
   controls = new OrbitControls( camera, renderer.domElement  )
+  controls.target.set(30, 39, -5);
 
   // add a directional light
   const directionalLight = new THREE.DirectionalLight( 0xffffff )
