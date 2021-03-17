@@ -100,7 +100,7 @@ function rndPts() {
     const startPts = [
       { x: 42, y: 23, z: 0 },
       { x: 42, y: 8, z: 0 },
-      { x: 16, y: 80, z: 0 },
+      { x: 16, y: 8, z: 0 },
       { x: 9, y: 22, z: 0 },
       { x: 22, y: 38, z: 0 },
   ]
