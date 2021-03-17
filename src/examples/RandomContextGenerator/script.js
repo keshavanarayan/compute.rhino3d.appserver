@@ -159,8 +159,7 @@ function onChange() {
   controls.enabled = false
 
 }
-  controls.enabled = false
-}
+  
 
 function onChangea() {
   dragging = ! dragging
