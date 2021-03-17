@@ -73,6 +73,27 @@ function download () {
   link.click()
 }
 
+function sitePoint() {
+  // generate random points
+  cconst xf = 30
+  const yf = 22
+  const zf = 0
+  const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
+  console.log( `x ${xf} y ${yf}` )
+  points.push(ptf)
+  const icof = new THREE.Mesh( icoGeo, icoMat )
+  icof.name = 'icof'
+  icof.position.set( xf, yf, zf)
+  scene.add( icof )
+  let tcontrolsf = new TransformControls( camera, renderer.domElement )
+  tcontrolsf.enabled = true
+  tcontrolsf.attach( icoa )
+  tcontrolsf.showZ = false
+  tcontrolsf.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsf)
+}
+}
+
 function rndPts() {
   // generate random points
   const x = 42
@@ -197,6 +218,11 @@ function onChange() {
         points.push(ptd)
         console.log('icod - ' + ptd)
       }
+      if (child.name === 'icof') {
+        const ptf = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        sitepoint.push(ptf)
+        console.log('site - ' + ptf)
+      }
     }, false)
 
     compute()
@@ -231,6 +257,7 @@ async function compute () {
       'RH_IN:DisplayYourDesign': displaydesign_checkbox.checked,
 
       'points': points,
+      'sitepoint': sitepoint,
     }
   }
 
