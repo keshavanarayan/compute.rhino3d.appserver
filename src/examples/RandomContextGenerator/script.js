@@ -83,6 +83,8 @@ function sitepoint()
   const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
   console.log( `x ${xf} y ${yf}` )
   sitePoint.push(ptf)
+  const icoGeo = new THREE.IcosahedronGeometry(1)
+  const icoMat = new THREE.MeshNormalMaterial()
   const icof = new THREE.Mesh( icoGeo, icoMat )
   icof.name = 'icof'
   icof.position.set( xf, yf, zf)
