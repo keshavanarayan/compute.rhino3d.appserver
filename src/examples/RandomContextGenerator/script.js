@@ -84,7 +84,7 @@ ico.name = 'ico'
 ico.position.set( x, y, z)
 scene.add( ico )
 
-let tcontrolsa = new TransformControls( camera, renderer.domElement )
+let tcontrols = new TransformControls( camera, renderer.domElement )
 tcontrols.enabled = true
 tcontrols.attach( ico )
 tcontrols.showZ = false
