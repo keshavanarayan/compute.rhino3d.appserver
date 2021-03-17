@@ -68,13 +68,13 @@ function sitePoint() {
   sitepoint.push(ptf)
   const icoGeof = new THREE.IcosahedronGeometry(1)
   const icoMatf = new THREE.MeshNormalMaterial()
-  const icoGeof = new THREE.Mesh( icoGeof, icoMatf )
+  const icof = new THREE.Mesh( icoGeof, icoMatf )
   icof.name = 'icof'
-  ico.position.set( xf, yf, zf)
+  icof.position.set( xf, yf, zf)
   scene.add( icof )
   let tcontrolsf = new TransformControls( camera, renderer.domElement )
   tcontrolsf.enabled = true
-  tcontrolsf.attach( ico )
+  tcontrolsf.attach( icof )
   tcontrolsf.showZ = false
   tcontrolsf.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsf)
@@ -210,7 +210,7 @@ function onChange() {
         console.log('site - ' + ptf)
       }
     }, false)
-    
+
     compute()
     controls.enabled = true
     return
