@@ -60,7 +60,7 @@ rhino3dm().then(async m => {
 
 function sitePoint() {
   // generate random points
-  const startSitePt = [
+  const startPt = [
     { x: 30, y: 22, z: 0 },
 ]
 const cntPts = startPt.length
