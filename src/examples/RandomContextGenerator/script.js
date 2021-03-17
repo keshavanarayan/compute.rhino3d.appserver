@@ -44,7 +44,7 @@ const displaydesign_checkbox = document.querySelector('input[id="RH_IN:DisplayYo
 displaydesign_checkbox.addEventListener( 'change', onSliderChange, false )
 
 let points = []
-let sitepoint = []
+let sitePoint = []
 
 let rhino, doc
 
@@ -74,7 +74,8 @@ function download () {
   link.click()
 }
 
-function sitePoint() {
+function sitepoint() 
+{
   // generate random points
   const xf = 30
   const yf = 22
@@ -88,7 +89,7 @@ function sitePoint() {
   scene.add( icof )
   let tcontrolsf = new TransformControls( camera, renderer.domElement )
   tcontrolsf.enabled = true
-  tcontrolsf.attach( icoa )
+  tcontrolsf.attach( icof )
   tcontrolsf.showZ = false
   tcontrolsf.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsf)
@@ -220,7 +221,7 @@ function onChange() {
       }
       if (child.name === 'icof') {
         const ptf = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        sitepoint.push(ptf)
+        sitePoint.push(ptf)
         console.log('site - ' + ptf)
       }
     }, false)
@@ -257,7 +258,7 @@ async function compute () {
       'RH_IN:DisplayYourDesign': displaydesign_checkbox.checked,
 
       'points': points,
-      'sitepoint': sitepoint,
+      'sitepoint': sitePoint,
     }
   }
 
