@@ -32,7 +32,7 @@ areaofblock_slider.addEventListener( 'mouseup', onSliderChange, false )
 areaofblock_slider.addEventListener( 'touchend', onSliderChange, false )
 
 
-const d_checkbox = document.querySelector('input[id="3d"]');
+const d_checkbox = document.querySelector('input[id="RH_IN:3d"]');
 d_checkbox.addEventListener( 'change', onSliderChange, false )
 const roadpolyline_checkbox = document.querySelector('input[id="RH_IN:DisplayRoadPolyline"]');
 roadpolyline_checkbox.addEventListener( 'change', onSliderChange, false )
