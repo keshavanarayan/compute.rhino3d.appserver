@@ -63,26 +63,26 @@ function sitePoint() {
   const startSPt = [
     { x: 30*5, y: 22*5, z: 0 },
 ]
-const cntSPts = startSPt.length
+const cntPts = startSPt.length
 
-  for (let i = 0; i < cntSPts; i++) {
-    const xs = startSPt[i].x
-    const ys = startSPt[i].y
-    const zs = startSPt[i].z
+  for (let i = 0; i < cntPts; i++) {
+    const x = startSPt[i].x
+    const y = startSPt[i].y
+    const z = startSPt[i].z
 
-    const pts = "{\"X\":" + xs + ",\"Y\":" + ys + ",\"Z\":" + zs + "}"
+    const pts = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
 
-    console.log( `x ${xs} y ${ys}` )
+    console.log( `x ${x} y ${y}` )
 
     sitepoint.push(pts)
 
 //viz in three
-const icoGeos = new THREE.IcosahedronGeometry(0.5)
-const icoMats = new THREE.MeshNormalMaterial()
-const icos = new THREE.Mesh( icoGeos, icoMats )
-icos.name = 'icos'
-icos.position.set( xs, ys, zs)
-scene.add( icos )
+const icoGeo = new THREE.IcosahedronGeometry(0.5)
+const icoMat = new THREE.MeshNormalMaterial()
+const ico = new THREE.Mesh( icoGeo, icoMat )
+ico.name = 'ico'
+ico.position.set( x, y, z)
+scene.add( ico )
 
 let tcontrolss = new TransformControls( camera, renderer.domElement )
 tcontrolss.enabled = true
@@ -167,8 +167,8 @@ function onChangea() {
     // update points position
     sitepoint = []
     scene.traverse(child => {
-      if ( child.name === 'icos' ) {
-        const pts = "{\"X\":" + child.position.xs + ",\"Y\":" + child.position.ys + ",\"Z\":" + child.position.zs + "}"
+      if ( child.name === 'ico' ) {
+        const pts = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
         sitepoint.push( pts )
         console.log(pts)
       }
