@@ -342,6 +342,8 @@ return null
  */
 function onSliderChange () {
   // show spinner
+  document.getElementById('RH_IN:AreaofPlot').innerText = new_value
+  document.getElementById('RH_IN:AreofBlock').innerText = new_valuea
   showSpinner(true)
   compute()
 }
