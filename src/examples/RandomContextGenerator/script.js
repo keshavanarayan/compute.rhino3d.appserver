@@ -57,6 +57,9 @@ rhino3dm().then(async m => {
   compute()
 })
 
+const downloadButton = document.getElementById("downloadButton")
+downloadButton.onclick = download
+
 function rndPts() {
   // generate random points
   const x = 42
