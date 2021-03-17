@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <link rel="icon" href="data:,">
-        <title>Voronoi_Table.gh</title>
+        <title>value_list.gh</title>
         <style>
             body {
                 margin: 0;
-                font-family: Arial, Helvetica, sans-serif;
+                font-family: monospace;
             }
             canvas { width: 100%; height: 100%; }
             input[type=range] { width: 100%; }
@@ -37,24 +37,20 @@
         <div id="loader"></div> 
         <div id="container">
             <div id="overlay">
+<!-- /////////////////////////////////////////////////////////////////////////// -->
                 <div>
-                  <label for="RH_IN:radius">RH_IN:radius</label>
-                  <input type="range" id="RH_IN:radius" min="5" max="20" value="20" step="1">
+                  <label for="RH_IN:number">number</label>
+                  <!-- <input type="number" id="RH_IN:number" value=""> -->
+                  <select name="numberDropdown" id="RH_IN:number">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                  </select>
                 </div>
-                <div>
-                  <label for="RH_IN:height">RH_IN:height</label>
-                  <input type="range" id="RH_IN:height" min="2" max="20" value="14" step="1">
-                </div>
-                <div>
-                  <label for="RH_IN:distance">RH_IN:distance</label>
-                  <input type="range" id="RH_IN:distance" min="0" max="100" value="24" step="1">
-                </div>
-                <div>
-                  <label for="RH_IN:explode">RH_IN:explode</label>
-                  <input type="checkbox" id="RH_IN:explode" >
-                </div>
+<!-- /////////////////////////////////////////////////////////////////////////// -->
                 <div><button id="downloadButton" disabled>Download</button></div>
-                <div><a href="Voronoi_Table.gh" download="Voronoi_Table.gh.html">Save source code</a></div>
+                <!-- <div><a href="value_list.gh" download="value_list.gh.html">Save source code</a></div> -->
             </div>
         </div>
 
@@ -70,7 +66,7 @@ loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 
 // initialise 'data' object that will be used by compute()
 const data = {
-  definition: 'Voronoi_Table.gh',
+  definition: 'value_list.gh',
   inputs: getInputs()
 }
 
@@ -81,7 +77,6 @@ rhino3dm().then(async m => {
     rhino = m
 
     init()
-    loadContext()
     compute()
 })
 
@@ -117,6 +112,12 @@ function getInputs() {
         break
     }
   }
+///////////////////////////////////////////////////////////////////////////
+  for (const input of document.getElementsByTagName('select')) {
+    inputs[input.id] = input.value
+    input.onchange = onSliderChange
+  }
+///////////////////////////////////////////////////////////////////////////
   return inputs
 }
 
@@ -161,15 +162,6 @@ function init() {
     window.addEventListener( 'resize', onWindowResize, false )
 
     animate()
-}
-
-function loadContext() {
-  loader.load('context.3dm', function (object) {
-    object.traverse(child => {
-      child.name = 'context'
-    })
-    scene.add(object)
-  })
 }
 
 /**
@@ -238,17 +230,20 @@ function collectResults(responseJson) {
     const buffer = new Uint8Array(doc.toByteArray()).buffer
     loader.parse( buffer, function ( object ) 
     {
-        // debug 
-        /*
+///////////////////////////////////////////////////////////////////////////
+        // show mesh edges
         object.traverse(child => {
-          if (child.material !== undefined)
-            child.material = new THREE.MeshNormalMaterial()
+          if (child.isMesh) {
+            const edges = new THREE.EdgesGeometry( child.geometry );
+            const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) )
+            child.add( line )
+          }
         }, false)
-        */
+///////////////////////////////////////////////////////////////////////////
 
         // clear objects from scene. do this here to avoid blink
         scene.traverse(child => {
-            if (!child.isLight && child.name !== 'context') {
+            if (!child.isLight) {
                 scene.remove(child)
             }
         })
@@ -302,6 +297,11 @@ function onSliderChange () {
       break
     }
   }
+///////////////////////////////////////////////////////////////////////////
+  for (const input of document.getElementsByTagName('select')) {
+    inputs[input.id] = input.value
+  }
+///////////////////////////////////////////////////////////////////////////
   
   data.inputs = inputs
 
