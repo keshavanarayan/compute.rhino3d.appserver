@@ -21,7 +21,7 @@ siteradius_slider.addEventListener( 'touchend', onSliderChange, false )
 const minfloorheight_slider = document.getElementById( 'RH_IN:MinFloorHeight' )
 minfloorheight_slider.addEventListener( 'mouseup', onSliderChange, false )
 minfloorheight_slider.addEventListener( 'touchend', onSliderChange, false )
-const maxfloorheight_slider = document.getElementById( 'RH_IN:SiteRadius' )
+const maxfloorheight_slider = document.getElementById( 'RH_IN:MaxFloorHeight' )
 maxfloorheight_slider.addEventListener( 'mouseup', onSliderChange, false )
 maxfloorheight_slider.addEventListener( 'touchend', onSliderChange, false )
 const areaofplot_slider = document.getElementById( 'RH_IN:AreaofPlot' )
@@ -120,7 +120,7 @@ function rndPts() {
   points.push(ptc)
   const icoc = new THREE.Mesh( icoGeo, icoMat )
   icoc.name = 'icoc'
-  icob.position.set( xc, yc, zc)
+  icoc.position.set( xc, yc, zc)
   scene.add( icoc )
   let tcontrolsc = new TransformControls( camera, renderer.domElement )
   tcontrolsc.enabled = true
