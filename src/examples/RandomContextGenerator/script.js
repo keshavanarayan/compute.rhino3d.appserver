@@ -82,7 +82,7 @@ function sitepoint()
   const zf = 0
   const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
   console.log( `x ${xf} y ${yf}` )
-  points.push(ptf)
+  sitePoint.push(ptf)
   const icof = new THREE.Mesh( icoGeo, icoMat )
   icof.name = 'icof'
   icof.position.set( xf, yf, zf)
