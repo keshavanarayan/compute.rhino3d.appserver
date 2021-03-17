@@ -80,8 +80,8 @@ const cntSPts = startSPt.length
 const icoGeos = new THREE.IcosahedronGeometry(0.5)
 const icoMats = new THREE.MeshNormalMaterial()
 const icos = new THREE.Mesh( icoGeos, icoMats )
-ico.name = 'icos'
-ico.position.set( x, y, z)
+icos.name = 'icos'
+icos.position.set( xs, ys, zs)
 scene.add( icos )
 
 let tcontrolss = new TransformControls( camera, renderer.domElement )
