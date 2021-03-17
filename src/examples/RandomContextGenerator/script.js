@@ -32,8 +32,8 @@ areaofblock_slider.addEventListener( 'mouseup', onSliderChange, false )
 areaofblock_slider.addEventListener( 'touchend', onSliderChange, false )
 
 
-const d_checkbox = document.querySelector('input[id="RH_IN:3d"]');
-d_checkbox.addEventListener( 'change', onSliderChange, false )
+const areadisplay_checkbox = document.querySelector('input[id="RH_IN:AreaDisplay"]');
+areadisplay_checkbox.addEventListener( 'change', onSliderChange, false )
 const roadpolyline_checkbox = document.querySelector('input[id="RH_IN:DisplayRoadPolyline"]');
 roadpolyline_checkbox.addEventListener( 'change', onSliderChange, false )
 const displaytrees_checkbox = document.querySelector('input[id="RH_IN:DisplayTrees"]');
@@ -208,7 +208,7 @@ async function compute () {
       'RH_IN:AreaofBlock': areaofblock_slider.valueAsNumber,
       'RH_IN:AreaofPlot': areaofblock_slider.valueAsNumber,
 
-      'RH_IN:3d': d_checkbox.checked,
+      'RH_IN:AreaDisplay': areadisplay_checkbox.checked,
       'RH_IN:DisplayRoadPolyline': roadpolyline_checkbox.checked,
       'RH_IN:DisplayTrees': displaytrees_checkbox.checked,
       'RH_IN:CarveOutSite': carveoutsite_checkbox.checked,
