@@ -60,8 +60,8 @@ rhino3dm().then(async m => {
 
 function sitePoint() {
   // generate random points
-  const xf = 4
-  const yf = -12
+  const xf = 30
+  const yf = 22
   const zf = 0
   const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
   console.log( `x ${xf} y ${yf}` )
@@ -83,8 +83,8 @@ function sitePoint() {
 
 function rndPts() {
   // generate random points
-  const x = 18
-  const y = 0
+  const x = 42
+  const y = 23
   const z = 0
   const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
   console.log( `x ${x} y ${y}` )
@@ -102,8 +102,8 @@ function rndPts() {
   tcontrols.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrols)
   //--------------------
-  const xa = 18
-  const ya = -18
+  const xa = 42
+  const ya = 8
   const za = 0
   const pta = "{\"X\":" + xa + ",\"Y\":" + ya + ",\"Z\":" + za + "}"
   console.log( `x ${xa} y ${ya}` )
@@ -119,8 +119,8 @@ function rndPts() {
   tcontrolsa.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsa)
   //--------------
-  const xb = -12
-  const yb = -14
+  const xb = 16
+  const yb = 8
   const zb = 0
   const ptb = "{\"X\":" + xb + ",\"Y\":" + yb + ",\"Z\":" + zb + "}"
   console.log( `x ${xb} y ${yb}` )
@@ -136,8 +136,8 @@ function rndPts() {
   tcontrolsb.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsb)
   //--------------
-  const xc = -11
-  const yc = 4
+  const xc = 9
+  const yc = 22
   const zc = 0
   const ptc = "{\"X\":" + xc + ",\"Y\":" + yc + ",\"Z\":" + zc + "}"
   console.log( `x ${xc} y ${yc}` )
@@ -153,8 +153,8 @@ function rndPts() {
   tcontrolsc.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsc)
   //--------------
-  const xd = -4
-  const yd = 8
+  const xd = 22
+  const yd = 38
   const zd = 0
   const ptd = "{\"X\":" + xd + ",\"Y\":" + yd + ",\"Z\":" + zd + "}"
   console.log( `x ${xd} y ${yd}` )
@@ -240,8 +240,8 @@ async function compute () {
       'RH_IN:CarveOutSite': carveoutsite_checkbox.checked,
       'RH_IN:DisplayYourDesign': displaydesign_checkbox.checked,
 
-      'RH_IN:points': points,
-      'RH_IN:SitePoint': sitepoint
+      'points': points,
+      'SitePoint': sitepoint
     }
   }
 
