@@ -86,7 +86,7 @@ scene.add( ico )
 
 let tcontrolss = new TransformControls( camera, renderer.domElement )
 tcontrolss.enabled = true
-tcontrolss.attach( icos)
+tcontrolss.attach( ico)
 tcontrolss.showZ = false
 tcontrolss.addEventListener( 'dragging-changed', onChangea )
 scene.add(tcontrolss)
