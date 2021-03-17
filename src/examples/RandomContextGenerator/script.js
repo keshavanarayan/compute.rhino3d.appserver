@@ -57,28 +57,6 @@ rhino3dm().then(async m => {
   compute()
 })
 
-function sitePoint() {
-  // generate random points
-  const xf = 30
-  const yf = 22
-  const zf = 0
-  const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
-  console.log( `x ${xf} y ${yf}` )
-  sitepoint.push(ptf)
-  const icoGeof = new THREE.IcosahedronGeometry(1)
-  const icoMatf = new THREE.MeshNormalMaterial()
-  const icof = new THREE.Mesh( icoGeof, icoMatf )
-  icof.name = 'icof'
-  icof.position.set( xf, yf, zf)
-  scene.add( icof )
-  let tcontrolsf = new TransformControls( camera, renderer.domElement )
-  tcontrolsf.enabled = true
-  tcontrolsf.attach( icof )
-  tcontrolsf.showZ = false
-  tcontrolsf.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsf)
-}
-
 function rndPts() {
   // generate random points
   const x = 42
@@ -203,11 +181,6 @@ function onChange() {
         points.push(ptd)
         console.log('icod - ' + ptd)
       }
-      if (child.name === 'icof') {
-        const ptf = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        sitepoint.push(ptf)
-        console.log('site - ' + ptf)
-      }
     }, false)
 
     compute()
@@ -242,7 +215,6 @@ async function compute () {
       'RH_IN:DisplayYourDesign': displaydesign_checkbox.checked,
 
       'points': points,
-      'SitePoint': sitepoint,
     }
   }
 
