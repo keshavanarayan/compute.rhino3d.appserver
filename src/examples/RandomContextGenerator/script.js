@@ -63,33 +63,33 @@ function sitePoint() {
   const startSPt = [
     { x: 30*5, y: 22*5, z: 0 },
 ]
-const cntPts = startSPt.length
+const cntSPts = startSPt.length
 
-  for (let i = 0; i < cntPts; i++) {
-    const x = startSPt[i].x
-    const y = startSPt[i].y
-    const z = startSPt[i].z
+  for (let i = 0; i < cntSPts; i++) {
+    const xs = startSPt[i].x
+    const ys = startSPt[i].y
+    const zs = startSPt[i].z
 
-    const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+    const pts = "{\"X\":" + xs + ",\"Y\":" + ys + ",\"Z\":" + zs + "}"
 
-    console.log( `x ${x} y ${y}` )
+    console.log( `x ${xs} y ${ys}` )
 
-    sitepoint.push(pt)
+    sitepoint.push(pts)
 
 //viz in three
-const icoGeo = new THREE.IcosahedronGeometry(0.5)
-const icoMat = new THREE.MeshNormalMaterial()
-const ico = new THREE.Mesh( icoGeo, icoMat )
-ico.name = 'ico'
+const icoGeos = new THREE.IcosahedronGeometry(0.5)
+const icoMats = new THREE.MeshNormalMaterial()
+const icos = new THREE.Mesh( icoGeos, icoMats )
+ico.name = 'icos'
 ico.position.set( x, y, z)
-scene.add( ico )
+scene.add( icos )
 
-let tcontrols = new TransformControls( camera, renderer.domElement )
-tcontrols.enabled = true
-tcontrols.attach( ico )
-tcontrols.showZ = false
-tcontrols.addEventListener( 'dragging-changed', onChangea )
-scene.add(tcontrols)
+let tcontrolss = new TransformControls( camera, renderer.domElement )
+tcontrolss.enabled = true
+tcontrolss.attach( icos)
+tcontrolss.showZ = false
+tcontrolss.addEventListener( 'dragging-changed', onChangea )
+scene.add(tcontrolss)
 
 }
 
@@ -160,27 +160,27 @@ function onChange() {
 
 }
   
-
+let draggings = false
 function onChangea() {
-  dragging = ! dragging
-  if ( !dragging ) {
+  draggings = ! draggings
+  if ( !draggings ) {
     // update points position
     sitepoint = []
     scene.traverse(child => {
-      if ( child.name === 'ico' ) {
-        const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        sitepoint.push( pt )
-        console.log(pt)
+      if ( child.name === 'icos' ) {
+        const pts = "{\"X\":" + child.position.xs + ",\"Y\":" + child.position.ys + ",\"Z\":" + child.position.zs + "}"
+        sitepoint.push( pts )
+        console.log(pts)
       }
     }, false)
 
     compute()
 
-    controls.enabled = true
+    controlss.enabled = true
     return 
 }
 
-  controls.enabled = false
+  controlss.enabled = false
 
 }
   
@@ -353,7 +353,7 @@ function onSliderChange () {
 
 // BOILERPLATE //
 
-var scene, camera, renderer, controls
+var scene, camera, renderer, controls, controlss
 
 function init() 
 {
