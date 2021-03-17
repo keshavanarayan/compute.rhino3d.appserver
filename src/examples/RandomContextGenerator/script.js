@@ -60,160 +60,130 @@ rhino3dm().then(async m => {
 
 function sitePoint() {
   // generate random points
-  const xf = 30
-  const yf = 22
-  const zf = 0
-  const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
-  console.log( `x ${xf} y ${yf}` )
-  points.push(ptf)
-  const icoGeo = new THREE.IcosahedronGeometry(1)
-  const icoMat = new THREE.MeshNormalMaterial()
-  const ico = new THREE.Mesh( icoGeo, icoMat )
-  ico.name = 'icof'
-  ico.position.set( xf, yf, zf)
-  scene.add( icof )
-  let tcontrolsf = new TransformControls( camera, renderer.domElement )
-  tcontrolsf.enabled = true
-  tcontrolsf.attach( icof )
-  tcontrolsf.showZ = false
-  tcontrolsf.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsf)
+  const startSitePt = [
+    { x: 30, y: 22, z: 0 },
+]
+const cntSPts = startSitePt.length
+
+  for (let i = 0; i < cntSPts; i++) {
+    const x = startSitePt[i].x
+    const y = startSitePt[i].y
+    const z = startSitePt[i].z
+
+    const Spt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+
+    console.log( `x ${x} y ${y}` )
+
+    sitepoint.push(Spt)
+
+//viz in three
+const icoGeoa = new THREE.IcosahedronGeometry(0.5)
+const icoMata = new THREE.MeshNormalMaterial()
+const icoa = new THREE.Mesh( icoGeoa, icoMata )
+ico.name = 'icoa'
+ico.position.set( x, y, z)
+scene.add( icoa )
+
+let tcontrolsa = new TransformControls( camera, renderer.domElement )
+tcontrolsa.enabled = true
+tcontrolsa.attach( icoa )
+tcontrolsa.showZ = false
+tcontrolsa.addEventListener( 'dragging-changed', onChangea )
+scene.add(tcontrolsa)
+
+}
+
 }
 
 
 function rndPts() {
-  // generate random points
-  const x = 42
-  const y = 23
-  const z = 0
-  const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
-  console.log( `x ${x} y ${y}` )
-  points.push(pt)
-  const icoGeo = new THREE.IcosahedronGeometry(1)
+    const startPts = [
+      { x: 42, y: 23, z: 0 },
+      { x: 42, y: 8, z: 0 },
+      { x: 16, y: 8, z: 0 },
+      { x: 9, y: 22, z: 0 },
+      { x: 22, y: 38, z: 0 },
+  ]
+  const cntPts = startPts.length
+  
+    for (let i = 0; i < cntPts; i++) {
+      const x = startPts[i].x
+      const y = startPts[i].y
+      const z = startPts[i].z
+  
+      const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+  
+      console.log( `x ${x} y ${y}` )
+  
+      points.push(pt)
+  //viz in three
+  const icoGeo = new THREE.IcosahedronGeometry(0.5)
   const icoMat = new THREE.MeshNormalMaterial()
   const ico = new THREE.Mesh( icoGeo, icoMat )
   ico.name = 'ico'
   ico.position.set( x, y, z)
   scene.add( ico )
+  
   let tcontrols = new TransformControls( camera, renderer.domElement )
   tcontrols.enabled = true
   tcontrols.attach( ico )
   tcontrols.showZ = false
   tcontrols.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrols)
-  //--------------------
-  const xa = 42
-  const ya = 8
-  const za = 0
-  const pta = "{\"X\":" + xa + ",\"Y\":" + ya + ",\"Z\":" + za + "}"
-  console.log( `x ${xa} y ${ya}` )
-  points.push(pta)
-  const icoa = new THREE.Mesh( icoGeo, icoMat )
-  icoa.name = 'icoa'
-  icoa.position.set( xa, ya, za)
-  scene.add( icoa )
-  let tcontrolsa = new TransformControls( camera, renderer.domElement )
-  tcontrolsa.enabled = true
-  tcontrolsa.attach( icoa )
-  tcontrolsa.showZ = false
-  tcontrolsa.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsa)
-  //--------------
-  const xb = 16
-  const yb = 8
-  const zb = 0
-  const ptb = "{\"X\":" + xb + ",\"Y\":" + yb + ",\"Z\":" + zb + "}"
-  console.log( `x ${xb} y ${yb}` )
-  points.push(ptb)
-  const icob = new THREE.Mesh( icoGeo, icoMat )
-  icob.name = 'icob'
-  icob.position.set( xb, yb, zb)
-  scene.add( icob )
-  let tcontrolsb = new TransformControls( camera, renderer.domElement )
-  tcontrolsb.enabled = true
-  tcontrolsb.attach( icob )
-  tcontrolsb.showZ = false
-  tcontrolsb.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsb)
-  //--------------
-  const xc = 9
-  const yc = 22
-  const zc = 0
-  const ptc = "{\"X\":" + xc + ",\"Y\":" + yc + ",\"Z\":" + zc + "}"
-  console.log( `x ${xc} y ${yc}` )
-  points.push(ptc)
-  const icoc = new THREE.Mesh( icoGeo, icoMat )
-  icoc.name = 'icoc'
-  icob.position.set( xc, yc, zc)
-  scene.add( icoc )
-  let tcontrolsc = new TransformControls( camera, renderer.domElement )
-  tcontrolsc.enabled = true
-  tcontrolsc.attach( icoc )
-  tcontrolsc.showZ = false
-  tcontrolsc.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsc)
-  //--------------
-  const xd = 22
-  const yd = 38
-  const zd = 0
-  const ptd = "{\"X\":" + xd + ",\"Y\":" + yd + ",\"Z\":" + zd + "}"
-  console.log( `x ${xd} y ${yd}` )
-  points.push(ptd)
-  const icod = new THREE.Mesh( icoGeo, icoMat )
-  icod.name = 'icod'
-  icod.position.set( xd, yd, zd)
-  scene.add( icod )
-  let tcontrolsd = new TransformControls( camera, renderer.domElement )
-  tcontrolsd.enabled = true
-  tcontrolsd.attach( icod )
-  tcontrolsd.showZ = false
-  tcontrolsd.addEventListener( 'dragging-changed', onChange )
-  scene.add(tcontrolsd)
+  
 }
+
+}
+
 
 let dragging = false
 function onChange() {
   dragging = ! dragging
-  if (!dragging) {
+  if ( !dragging ) {
     // update points position
     points = []
-    sitepoint = []
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
         points.push( pt )
-        console.log('ico - ' + pt)
-      }
-      if (child.name === 'icoa') {
-        const pta = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push(pta)
-        console.log('icoa - ' + pta)
-      }
-      if (child.name === 'icob') {
-        const ptb = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push(ptb)
-        console.log('icob - ' + ptb)
-      }
-      if (child.name === 'icoc') {
-        const ptc = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push(ptc)
-        console.log('icoc - ' + ptc)
-      }
-      if (child.name === 'icod') {
-        const ptd = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push(ptd)
-        console.log('icod - ' + ptd)
-      }
-      if (child.name === 'icof') {
-        const ptf = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        sitepoint.push(ptf)
-        console.log('site - ' + ptf)
+        console.log(pt)
       }
     }, false)
+
     compute()
+
     controls.enabled = true
-    return
-  }
+    return 
+}
+
+  controls.enabled = false
+
+}
+  controls.enabled = false
+}
+
+function onChangea() {
+  dragging = ! dragging
+  if ( !dragging ) {
+    // update points position
+    points = []
+    scene.traverse(child => {
+      if ( child.name === 'icoa' ) {
+        const pta = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        points.push( pta )
+        console.log(pta)
+      }
+    }, false)
+
+    compute()
+
+    controls.enabled = true
+    return 
+}
+
+  controls.enabled = false
+
+}
   controls.enabled = false
 }
 /**
