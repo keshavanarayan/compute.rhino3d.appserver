@@ -54,6 +54,7 @@ rhino3dm().then(async m => {
 
   init()
   rndPts()
+  sitepoint()
   compute()
 })
 
@@ -75,7 +76,7 @@ function download () {
 
 function sitePoint() {
   // generate random points
-  cconst xf = 30
+  const xf = 30
   const yf = 22
   const zf = 0
   const ptf = "{\"X\":" + xf + ",\"Y\":" + yf + ",\"Z\":" + zf + "}"
@@ -91,7 +92,6 @@ function sitePoint() {
   tcontrolsf.showZ = false
   tcontrolsf.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsf)
-}
 }
 
 function rndPts() {
