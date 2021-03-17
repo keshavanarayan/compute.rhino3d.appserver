@@ -54,7 +54,6 @@ rhino3dm().then(async m => {
 
   init()
   rndPts()
-  sitePoint()
   compute()
 })
 
