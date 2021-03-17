@@ -366,7 +366,7 @@ function init()
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
   scene = new THREE.Scene()
-  scene.background = new THREE.Color(255,255,255)
+  scene.background = new THREE.Color(0xff0000, 1)
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
   camera.position.y = 1000
