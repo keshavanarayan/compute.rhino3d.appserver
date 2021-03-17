@@ -45,6 +45,7 @@ displaydesign_checkbox.addEventListener( 'change', onSliderChange, false )
 
 let points = []
 let sitePoint = []
+let roadPoint = []
 
 let rhino, doc
 
@@ -55,6 +56,7 @@ rhino3dm().then(async m => {
   init()
   rndPts()
   sitepoint()
+  roadpoint()
   compute()
 })
 
@@ -67,7 +69,7 @@ function download () {
   const blob = new Blob([bytes], {type: "application/octect-stream"})
 
   // use "hidden link" trick to get the browser to download the blob
-  const filename = data.definition.replace(/\.gh$/, '') + '.3dm'
+  const filename = 'a' + '.3dm'
   const link = document.createElement('a')
   link.href = window.URL.createObjectURL(blob)
   link.download = filename
@@ -95,6 +97,47 @@ function sitepoint()
   tcontrolsf.showZ = false
   tcontrolsf.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsf)
+}
+
+function roadpoint() 
+{
+  // generate random points
+  const xg = 6
+  const yg = 28
+  const zg = 0
+  const ptg = "{\"X\":" + xg + ",\"Y\":" + yg + ",\"Z\":" + zg + "}"
+  console.log( `x ${xg} y ${yg}` )
+  sitePoint.push(ptg)
+  const icoGeo = new THREE.IcosahedronGeometry(1)
+  const icoMat = new THREE.MeshNormalMaterial()
+  const icog = new THREE.Mesh( icoGeo, icoMat )
+  icog.name = 'icog'
+  icog.position.set( xg, yg, zg)
+  scene.add( icog )
+  let tcontrolsg = new TransformControls( camera, renderer.domElement )
+  tcontrolsg.enabled = true
+  tcontrolsg.attach( icog )
+  tcontrolsg.showZ = false
+  tcontrolsg.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsg)
+  //---------
+
+  const xh = 47
+  const yh = 11
+  const zh = 0
+  const pth = "{\"X\":" + xh + ",\"Y\":" + yh + ",\"Z\":" + zh + "}"
+  console.log( `x ${xh} y ${yh}` )
+  sitePoint.push(pth)
+  const icoh = new THREE.Mesh( icoGeo, icoMat )
+  icoh.name = 'icoh'
+  icoh.position.set( xh, yh, zh)
+  scene.add( icoh )
+  let tcontrolsh = new TransformControls( camera, renderer.domElement )
+  tcontrolsh.enabled = true
+  tcontrolsh.attach( icoh )
+  tcontrolsh.showZ = false
+  tcontrolsh.addEventListener( 'dragging-changed', onChange )
+  scene.add(tcontrolsh)
 }
 
 function rndPts() {
@@ -153,7 +196,7 @@ function rndPts() {
   scene.add(tcontrolsb)
   //--------------
   const xc = 9
-  const yc = 22
+  const yc = 20
   const zc = 0
   const ptc = "{\"X\":" + xc + ",\"Y\":" + yc + ",\"Z\":" + zc + "}"
   console.log( `x ${xc} y ${yc}` )
@@ -225,6 +268,16 @@ function onChange() {
         const ptf = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
         sitePoint.push(ptf)
         console.log('site - ' + ptf)
+      }
+      if (child.name === 'icog') {
+        const ptg = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        roadPoint.push(ptg)
+        console.log('site - ' + ptg)
+      }
+      if (child.name === 'icoh') {
+        const pth = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        roadPoint.push(pth)
+        console.log('site - ' + pth)
       }
     }, false)
 
