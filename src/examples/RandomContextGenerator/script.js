@@ -169,7 +169,7 @@ function onChangea() {
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pta = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push( pt )
+        sitepoint.push( pt )
         console.log(pt)
       }
     }, false)
