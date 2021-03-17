@@ -59,8 +59,8 @@ rhino3dm().then(async m => {
 
 function rndPts() {
   // generate random points
-  const x = 42
-  const y = 23
+  const x = 42.59
+  const y = 23.34
   const z = 0
   const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
   console.log( `x ${x} y ${y}` )
@@ -78,8 +78,8 @@ function rndPts() {
   tcontrols.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrols)
   //--------------------
-  const xa = 42
-  const ya = 8
+  const xa = 42.56
+  const ya = 8.42
   const za = 0
   const pta = "{\"X\":" + xa + ",\"Y\":" + ya + ",\"Z\":" + za + "}"
   console.log( `x ${xa} y ${ya}` )
@@ -95,8 +95,8 @@ function rndPts() {
   tcontrolsa.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsa)
   //--------------
-  const xb = 16
-  const yb = 8
+  const xb = 16.66
+  const yb = 8.26
   const zb = 0
   const ptb = "{\"X\":" + xb + ",\"Y\":" + yb + ",\"Z\":" + zb + "}"
   console.log( `x ${xb} y ${yb}` )
@@ -112,8 +112,8 @@ function rndPts() {
   tcontrolsb.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsb)
   //--------------
-  const xc = 9
-  const yc = 22
+  const xc = 9.56
+  const yc = 22.39
   const zc = 0
   const ptc = "{\"X\":" + xc + ",\"Y\":" + yc + ",\"Z\":" + zc + "}"
   console.log( `x ${xc} y ${yc}` )
@@ -129,8 +129,8 @@ function rndPts() {
   tcontrolsc.addEventListener( 'dragging-changed', onChange )
   scene.add(tcontrolsc)
   //--------------
-  const xd = 22
-  const yd = 38
+  const xd = 22.58
+  const yd = 38.09
   const zd = 0
   const ptd = "{\"X\":" + xd + ",\"Y\":" + yd + ",\"Z\":" + zd + "}"
   console.log( `x ${xd} y ${yd}` )
