@@ -12,35 +12,35 @@ loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 const definition = 'RandomContextGenerator.gh'
 
 // setup input change events
-const roadwidth_slider = document.getElementById( 'Road Width' )
+const roadwidth_slider = document.getElementById( 'RH_IN:RoadWidth' )
 roadwidth_slider.addEventListener( 'mouseup', onSliderChange, false )
 roadwidth_slider.addEventListener( 'touchend', onSliderChange, false )
-const siteradius_slider = document.getElementById( 'Site Radius' )
+const siteradius_slider = document.getElementById( 'RH_IN:SiteRadius' )
 siteradius_slider.addEventListener( 'mouseup', onSliderChange, false )
 siteradius_slider.addEventListener( 'touchend', onSliderChange, false )
-const minfloorheight_slider = document.getElementById( 'Min Floor Height' )
+const minfloorheight_slider = document.getElementById( 'RH_IN:MinFloorHeight' )
 minfloorheight_slider.addEventListener( 'mouseup', onSliderChange, false )
 minfloorheight_slider.addEventListener( 'touchend', onSliderChange, false )
-const maxfloorheight_slider = document.getElementById( 'Site Radius' )
+const maxfloorheight_slider = document.getElementById( 'RH_IN:SiteRadius' )
 maxfloorheight_slider.addEventListener( 'mouseup', onSliderChange, false )
 maxfloorheight_slider.addEventListener( 'touchend', onSliderChange, false )
-const areaofplot_slider = document.getElementById( 'Area of Plot' )
+const areaofplot_slider = document.getElementById( 'RH_IN:AreaofPlot' )
 areaofplot_slider.addEventListener( 'mouseup', onSliderChange, false )
 areaofplot_slider.addEventListener( 'touchend', onSliderChange, false )
-const areaofblock_slider = document.getElementById( 'Area of Block' )
+const areaofblock_slider = document.getElementById( 'RH_IN:AreaofBlock' )
 areaofblock_slider.addEventListener( 'mouseup', onSliderChange, false )
 areaofblock_slider.addEventListener( 'touchend', onSliderChange, false )
 
 
 const d_checkbox = document.querySelector('input[id="3d"]');
 d_checkbox.addEventListener( 'change', onSliderChange, false )
-const roadpolyline_checkbox = document.querySelector('input[id="Road Polyline"]');
+const roadpolyline_checkbox = document.querySelector('input[id="RH_IN:DisplayRoadPolyline"]');
 roadpolyline_checkbox.addEventListener( 'change', onSliderChange, false )
-const displaytrees_checkbox = document.querySelector('input[id="Display Trees"]');
+const displaytrees_checkbox = document.querySelector('input[id="RH_IN:DisplayTrees"]');
 displaytrees_checkbox.addEventListener( 'change', onSliderChange, false )
-const carveoutsite_checkbox = document.querySelector('input[id="Carve Out Site"]');
+const carveoutsite_checkbox = document.querySelector('input[id="RH_IN:CarveOutSite"]');
 carveoutsite_checkbox.addEventListener( 'change', onSliderChange, false )
-const displaydesign_checkbox = document.querySelector('input[id="Display Design"]');
+const displaydesign_checkbox = document.querySelector('input[id="RH_IN:DisplayYourDesign"]');
 displaydesign_checkbox.addEventListener( 'change', onSliderChange, false )
 
 let points = []
@@ -232,7 +232,7 @@ async function compute () {
       'RH_IN:MinFloorHeight': minfloorheight_slider.valueAsNumber,
       'RH_IN:MaxFloorHeight': maxfloorheight_slider.valueAsNumber,
       'RH_IN:AreaofBlock': areaofblock_slider.valueAsNumber,
-      'RH_IN:Area of Plot': areaofblock_slider.valueAsNumber,
+      'RH_IN:AreaofPlot': areaofblock_slider.valueAsNumber,
 
       'RH_IN:3d': d_checkbox.checked,
       'RH_IN:DisplayRoadPolyline': roadpolyline_checkbox.checked,
@@ -241,7 +241,7 @@ async function compute () {
       'RH_IN:DisplayYourDesign': displaydesign_checkbox.checked,
 
       'points': points,
-      'SitePoint': sitepoint
+      'SitePoint': sitepoint,
     }
   }
 
