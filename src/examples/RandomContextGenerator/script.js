@@ -183,8 +183,7 @@ function onChangea() {
   controls.enabled = false
 
 }
-  controls.enabled = false
-}
+  
 /**
  * Call appserver
  */
