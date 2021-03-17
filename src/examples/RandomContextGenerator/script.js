@@ -209,7 +209,7 @@ async function compute () {
       'RH_IN:MinFloorHeight': minfloorheight_slider.valueAsNumber,
       'RH_IN:MaxFloorHeight': maxfloorheight_slider.valueAsNumber,
       'RH_IN:AreaofBlock': areaofblock_slider.valueAsNumber,
-      'RH_IN:AreaofPlot': areaofblock_slider.valueAsNumber,
+      'RH_IN:AreaofPlot': areaofplot_slider.valueAsNumber,
 
       'RH_IN:AreaDisplay': areadisplay_checkbox.checked,
       'RH_IN:DisplayRoadPolyline': roadpolyline_checkbox.checked,
