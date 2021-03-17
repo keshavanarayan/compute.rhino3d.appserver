@@ -61,7 +61,7 @@ rhino3dm().then(async m => {
 function sitePoint() {
   // generate random points
   const startSPt = [
-    { x: 30, y: 22, z: 0 },
+    { x: 300, y: 220, z: 0 },
 ]
 const cntPts = startSPt.length
 
@@ -98,11 +98,11 @@ scene.add(tcontrols)
 
 function rndPts() {
     const startPts = [
-      { x: 42, y: 23, z: 0 },
-      { x: 42, y: 8, z: 0 },
-      { x: 16, y: 8, z: 0 },
-      { x: 9, y: 22, z: 0 },
-      { x: 22, y: 38, z: 0 },
+      { x: 420, y: 230, z: 0 },
+      { x: 420, y: 80, z: 0 },
+      { x: 160, y: 80, z: 0 },
+      { x: 90, y: 220, z: 0 },
+      { x: 220, y: 380, z: 0 },
   ]
   const cntPts = startPts.length
   
