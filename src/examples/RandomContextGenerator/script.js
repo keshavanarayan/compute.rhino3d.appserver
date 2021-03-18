@@ -314,6 +314,7 @@ async function compute () {
 
       'points': points,
       'sitepoint': sitePoint,
+      'roadpoint': roadPoint,
     }
   }
 
