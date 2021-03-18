@@ -107,7 +107,7 @@ function roadpoint()
   const zg = 0
   const ptg = "{\"X\":" + xg + ",\"Y\":" + yg + ",\"Z\":" + zg + "}"
   console.log( `x ${xg} y ${yg}` )
-  sitePoint.push(ptg)
+  roadPoint.push(ptg)
   const icoGeo = new THREE.IcosahedronGeometry(1)
   const icoMat = new THREE.MeshNormalMaterial()
   const icog = new THREE.Mesh( icoGeo, icoMat )
@@ -127,7 +127,7 @@ function roadpoint()
   const zh = 0
   const pth = "{\"X\":" + xh + ",\"Y\":" + yh + ",\"Z\":" + zh + "}"
   console.log( `x ${xh} y ${yh}` )
-  sitePoint.push(pth)
+  roadPoint.push(pth)
   const icoh = new THREE.Mesh( icoGeo, icoMat )
   icoh.name = 'icoh'
   icoh.position.set( xh, yh, zh)
