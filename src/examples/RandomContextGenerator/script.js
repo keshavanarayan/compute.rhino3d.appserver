@@ -237,7 +237,8 @@ function onChange() {
   if (!dragging) {
     // update points position
     points = []
-    sitepoint = []
+    sitePoint = []
+    roadPoint = []
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
