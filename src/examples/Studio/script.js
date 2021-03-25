@@ -27,6 +27,7 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
+  zoomCameraToSelection()
   compute()
 })
 
