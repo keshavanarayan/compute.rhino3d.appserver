@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Metaball Table</title>
+        <title>Studio</title>
         <style>
             body { margin: 0; }
             canvas { width: 100%; height: 100%; }
@@ -34,12 +34,12 @@
         <div id="container">
             <div id="overlay">
                 <div>
-                    <input type="range" id="dimension" name="dimension" min="350" max="1000" value="800" step="10">
-                    <label for="dimension">Dimension</label>
+                    <label for="RH_IN:ShowTerrainSurface" style="color:rgb(255, 255, 255)">Show Terrain Surface</label>
+                    <input type="checkbox" id="RH_IN:ShowTerrainSurface" checked>
                 </div>
                 <div>
-                    <input type="range" id="height" name="height" min="350" max="1000" value="350" step="1">
-                    <label for="height">Height</label>
+                    <input type="range" id="RH_IN:Position" name="" min="0" max="100" value="0" step="1">
+                    <label for="RH_IN:Position">Position</label>
                 </div>
             </div>
         </div>
