@@ -9,15 +9,14 @@ import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm
 const loader = new Rhino3dmLoader()
 loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 
-const definition = 'metaballTable.gh'
+const definition = 'Studio.gh'
 
 // setup input change events
-const dimension_slider = document.getElementById( 'dimension' )
-dimension_slider.addEventListener( 'mouseup', onSliderChange, false )
-dimension_slider.addEventListener( 'touchend', onSliderChange, false )
-const height_slider = document.getElementById( 'height' )
-height_slider.addEventListener( 'mouseup', onSliderChange, false )
-height_slider.addEventListener( 'touchend', onSliderChange, false )
+const position = document.getElementById( 'RH_IN:Position' )
+position.addEventListener( 'mouseup', onSliderChange, false )
+position.addEventListener( 'touchend', onSliderChange, false )
+const checkbox = document.querySelector('input[id="RH_IN:ShowTerrainSurface"]');
+checkbox.addEventListener( 'change', onSliderChange, false )
 
 let points = []
 
@@ -28,70 +27,10 @@ rhino3dm().then(async m => {
   rhino = m // global
 
   init()
-  rndPts()
   compute()
 })
 
-function rndPts() {
-  // generate random points
 
-  const cntPts = 3
-  const bndX = dimension_slider.valueAsNumber / 2
-  const bndY = dimension_slider.valueAsNumber / 2
-
-  for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * (bndX - -bndX) + -bndX
-    const y = Math.random() * (bndY - -bndY) + -bndY
-    const z = 0
-
-    const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
-
-    console.log( `x ${x} y ${y}` )
-
-    points.push(pt)
-
-    //viz in three
-    const icoGeo = new THREE.IcosahedronGeometry(25)
-    const icoMat = new THREE.MeshNormalMaterial()
-    const ico = new THREE.Mesh( icoGeo, icoMat )
-    ico.name = 'ico'
-    ico.position.set( x, y, z)
-    scene.add( ico )
-    
-    let tcontrols = new TransformControls( camera, renderer.domElement )
-    tcontrols.enabled = true
-    tcontrols.attach( ico )
-    tcontrols.showZ = false
-    tcontrols.addEventListener( 'dragging-changed', onChange )
-    scene.add(tcontrols)
-    
-  }
-
-}
-
-let dragging = false
-function onChange() {
-  dragging = ! dragging
-  if ( !dragging ) {
-    // update points position
-    points = []
-    scene.traverse(child => {
-      if ( child.name === 'ico' ) {
-        const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
-        points.push( pt )
-        console.log(pt)
-      }
-    }, false)
-
-    compute()
-
-    controls.enabled = true
-    return 
-}
-
-  controls.enabled = false
-
-}
 
 /**
  * Call appserver
@@ -104,9 +43,8 @@ async function compute () {
   const data = {
     definition: definition,
     inputs: {
-      'dimension': dimension_slider.valueAsNumber,
-      'height': height_slider.valueAsNumber,
-      'points': points
+      'RH_IN:ShowTerrainSurface': checkbox,
+      'RH_IN:Position': position,
     }
   }
 
